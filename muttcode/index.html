@@ -1,0 +1,1646 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Mutt Code</title>
+    <script src="blockly_compressed.js"></script>
+<!-- Load the default blocks -->
+<script src="blocks_compressed.js"></script>
+<!-- Load a generator -->
+<script src="javascript_compressed.js"></script>
+<!-- Load a message file -->
+<script src="en.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="mutt.svg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.2.4/svg.min.js" referrerpolicy="no-referrer"></script>
+    <style>
+      body {
+        font-family: Arial;
+      }
+
+      .ui2 {
+        display: inline-block;
+      }
+      .right {
+        float: right;
+      }
+      /* Style the tab */
+      .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+      }
+      
+      /* Style the buttons inside the tab */
+      .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+      }
+      
+      /* Change background color of buttons on hover */
+      .tab button:hover {
+        background-color: #ddd;
+        padding: 14px 16px;
+        border: none;
+      }
+      
+      /* Create an active/current tablink class */
+      .tab button.active {
+        background-color: #ccc;
+        padding: 14px 16px;
+        border: none;
+      }
+      
+      /* Style the tab content */
+      .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+      }
+      h1 {
+        font-weight: normal;
+        font-size: 140%;
+      }
+      .button2 {
+        border-radius: 3px;
+        border: 2px solid rgb(200,200,200);
+        padding: 4px;
+        background-color: rgb(240,240,240);
+        font-weight: 400;
+        font-style: normal;
+      }
+      .button2:hover {
+        border-radius: 3px;
+        border: 2px solid rgb(0,200,200);
+        padding: 4px;
+        background-color: rgb(230,230,230);
+      }
+      #iframe {
+        border: 2px solid #000;
+        padding: 0px;
+      }
+      .hiddden {
+        display: none;
+      }
+      .show {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div class="tab">
+      <button id="btn11" class="tablinks" onclick="openTab(event, 'Blocks')">Blocks</button>
+      <button class="tablinks" onclick="openTab(event, 'SVG')">SVG Editor</button>
+    
+    </div>
+    
+    <div id="Blocks" class="tabcontent">
+      <input type="image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%23000000'%3E%3Cpath d='m384-336 56-57-87-87 87-87-56-57-144 144 144 144Zm192 0 144-144-144-144-56 57 87 87-87 87 56 57ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z'/%3E%3C/svg%3E" onclick="showCode()" data-toggle="modal" data-target="#jsmodal" style="width:30px; height: 30px;"> <input type="image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%23000000'%3E%3Cpath d='M840-680v480q0 33-23.5 56.5T760-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h480l160 160Zm-80 34L646-760H200v560h560v-446ZM480-240q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM240-560h360v-160H240v160Zm-40-86v446-560 114Z'/%3E%3C/svg%3E" onclick="save()" style="width:30px; height: 30px;"><input type="image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%23000000'%3E%3Cpath d='M240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v240h-80v-200H520v-200H240v640h360v80H240Zm638 15L760-183v89h-80v-226h226v80h-90l118 118-56 57Zm-638-95v-640 640Z'/%3E%3C/svg%3E" onclick="load()" style="width:30px; height: 30px;"> <input type="image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%23000000'%3E%3Cpath d='M200-120v-680h360l16 80h224v400H520l-16-80H280v280h-80Zm300-440Zm86 160h134v-240H510l-16-80H280v240h290l16 80Z'/%3E%3C/svg%3E" onclick="runCode()" style="width:30px; height: 30px;"> <input type="image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%23000000'%3E%3Cpath d='m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z'/%3E%3C/svg%3E" onclick="stop()" style="width:30px; height: 30px;"><br>
+      <div class="ui2" id="blocklyDiv" width="100px" height="100px">
+      </div>
+      <div class="ui2 right">
+      <div class="ui2" id="canvas" width="210px" height="210px" style="border:1px solid black;">
+      </div><br>
+      <button onclick="clearCanvas();" class="ui2">Clear canvas</button>
+      </div>
+    </div>
+    
+    <div id="SVG" class="tabcontent">
+      <div><iframe src="https://svgedit.netlify.app/editor/index.html" id="svgEditor"></iframe></div>
+    </div>
+
+    
+    <div style="position: absolute; background-color: green; color: white; width:210px; height: 60px;" id="notify">
+      <b>Updates</b>  <span style="font-size:10px;"><a href="https://sites.google.com/view/mutt-code/news/major-update-1" style="color:red;">See more</a></span> <div class="right"><button style=" background:none; border:none;" onclick="document.getElementById('notify').style.display = 'none';">X</button></div><br>
+      <div style="font-size:13px;">Recently, Mutt Code recived a major update regaurding the Stage.</div>
+      <script>
+        const element = document.getElementById("notify");
+        element.style.left = (window.innerWidth - 220) + "px";
+        element.style.top = (window.innerHeight - 70) + "px";
+      </script>
+    </div>
+
+    
+    <!-- Modal -->
+  <div class="modal fade" id="jsmodal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">JavaScript code</h4>
+        </div>
+        <div class="modal-body" id="jsv" style="font-family: Monospace;">
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <input type="text" id="handle" value="NO" class="hidden">
+  <img class="hidden" id="mutt.png" src="data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='31.53595' height='43.75113' viewBox='0,0,31.53595,43.75113'%3E%3Cg transform='translate(-224.23202,-164.23202)'%3E%3Cg data-paper-data='%7B&quot;isPaintingLayer&quot;:true%7D' fill-rule='nonzero' stroke='%23000000' stroke-width='2' stroke-linejoin='miter' stroke-miterlimit='10' stroke-dasharray='' stroke-dashoffset='0' style='mix-blend-mode: normal'%3E%3Cpath d='M225.23202,180c0,-8.15613 6.61185,-14.76798 14.76798,-14.76798c8.15613,0 14.76798,6.61185 14.76798,14.76798c0,8.15613 -6.61185,14.76798 -14.76798,14.76798c-8.15613,0 -14.76798,-6.61185 -14.76798,-14.76798z' fill='%23ffffff' stroke-linecap='butt'/%3E%3Cpath d='M228.99928,206.98315l11.65286,-11.65286' fill='none' stroke-linecap='round'/%3E%3Cpath d='M250.95938,206.90666l-11.65285,-11.65285' data-paper-data='%7B&quot;index&quot;:null%7D' fill='none' stroke-linecap='round'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E">
+  <img class="hidden" id="whip.png" src="whip.png">
+  <img class="hidden" id="slaver.png" src="slaver.png">
+    
+    <script>
+      document.getElementById("Blocks").style.display = "block";
+      document.getElementById("btn11").click();
+      /*
+  const selectElement = document.getElementById("mySelect");
+
+  const options = [
+    { value: "apple", text: "Apple" },
+    { value: "banana", text: "Banana" },
+    { value: "orange", text: "Orange" },
+  ];
+
+  options.forEach((option) => {
+    const newOption = document.createElement("option");
+    newOption.value = option.value;
+    newOption.text = option.text;
+    selectElement.add(newOption);
+  });
+
+  // Set the default selected option
+  selectElement.value = "banana";
+      */
+
+      var draw = SVG().addTo('#canvas').size(210, 210);
+
+      /*
+      const playground = draw.group();
+      var sprites = playground.group();
+      */
+      function clearCanvas() {
+        var rect = draw.rect(210, 210).attr({ fill: '#fff' });
+      }
+      /*
+
+      function newSprite(pic,scale) {
+        return sprites.image(pic)
+sprite.size(scale, scale).move(20, 20);
+      };
+      
+      function spriteAt(sprite,x,y) {
+        sprite.center(x, y)
+      }
+      */
+      
+      function openTab(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+      }
+      document.getElementById('blocklyDiv').style.width = (window.innerWidth - 250) + 'px';
+      
+      document.getElementById('svgEditor').style.width = (window.innerWidth - 40) + 'px';
+      
+      document.getElementById('blocklyDiv').style.height = (window.innerHeight - 100) + 'px';
+      
+      document.getElementById('svgEditor').style.height = (window.innerHeight - 50) + 'px';
+      
+      //document.getElementById('canvas').style.height = (window.innerHeight - 100) + 'px';
+      window.addEventListener('resize', function() {
+        document.getElementById('blocklyDiv').style.width = (window.innerWidth - 250) + 'px';
+      
+      document.getElementById('svgEditor').style.width = (window.innerWidth - 40) + 'px';
+      
+      document.getElementById('blocklyDiv').style.height = (window.innerHeight - 100) + 'px';
+      
+      document.getElementById('svgEditor').style.height = (window.innerHeight - 50) + 'px';
+      
+      //document.getElementById('canvas').style.height = (window.innerHeight - 100) + 'px';
+      });
+/*
+      function contSave(value) {
+        const state = Blockly.serialization.workspaces.save(demoWorkspace);
+        localStorage.setItem('workspace-state-'+document.getElementById('pjn').value, JSON.stringify(state));
+        var fl = localStorage.getItem('workspaces');
+        var st = {};
+        st['value'] = 'workspace-state-'+document.getElementById('pjn').value;
+        st['text'] = document.getElementById('pjn').value;
+        fl.push(st);
+        document.getElementById('pjn').value = '';
+      }
+*/
+      var toolbox = {
+  "kind": "categoryToolbox",
+  "contents": [
+    {
+      "kind": "category",
+      "name": "Events",
+      "categorystyle": "event_category",
+      "contents": [
+        {
+          "kind": "block",
+          "type": "init"
+        },
+        {
+          "kind": "block",
+          "type": "keypress"
+        },
+        {
+          "kind": "block",
+          "type": "delayRun"
+        }
+      ]
+    },
+    {
+      "kind": "category",
+      "name": "Stage",
+      "categorystyle": "raw_category",
+      "contents": [
+        {
+          "kind": "category",
+          "name": "Data",
+          "categorystyle": "raw_category",
+          "contents": [
+            {
+              "kind": "block",
+              "type": "drawRect"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "category",
+      "name": "Sprites",
+      "categorystyle": "raw_category",
+      "contents": [
+        {
+          "kind": "category",
+          "name": "Movement",
+          "categorystyle": "raw_category",
+          "contents": [
+            {
+              "kind": "block",
+              "type": "placeAt"
+            },
+          ]
+        },{
+              "kind": "category",
+              "name": "Data",
+              "categorystyle": "raw_category",
+              "contents": [
+                {
+                  "kind": "block",
+                  "type": "newSprite"
+                },
+                {
+                  "kind": "block",
+                  "type": "pic"
+                }
+              ]
+            }
+      ]
+    },
+        {
+          "kind": "category",
+          "name": "Logic",
+          "categorystyle": "logic_category",
+          "contents": [
+            {
+              "kind": "block",
+              "type": "controls_if"
+            },
+            {
+              "kind": "block",
+              "type": "logic_compare"
+            },
+            {
+              "kind": "block",
+              "type": "logic_operation"
+            },
+            {
+              "kind": "block",
+              "type": "logic_negate"
+            },
+            {
+              "kind": "block",
+              "type": "logic_boolean"
+            },
+            {
+              "kind": "block",
+              "type": "logic_null"
+            }
+          ]
+        },
+        {
+          "kind": "category",
+          "name": "Loops",
+          "categorystyle": "loop_category",
+          "contents": [
+            {
+              "kind": "block",
+              "type": "controls_repeat_ext",
+              "inputs": {
+                "TIMES": {
+                  "block": {
+                    "type": "math_number",
+                    "fields": {
+                      "NUM": 10
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "kind": "block",
+              "type": "controls_whileUntil"
+            },
+            {
+              "kind": "block",
+              "type": "controls_for"
+            },
+            {
+              "kind": "block",
+              "type": "controls_forEach"
+            },
+            {
+              "kind": "block",
+              "type": "controls_flow_statements"
+            }
+          ]
+        },
+        {
+          "kind": "category",
+          "name": "Math",
+          "categorystyle": "math_category",
+          "contents": [
+            {
+              "kind": "category",
+              "name": "Functions",
+              "categorystyle": "math_category",
+              "contents": [
+                {
+                  "kind": "block",
+                  "type": "math_arithmetic"
+                },
+                {
+                  "kind": "block",
+                  "type": "math_single"
+                },
+                {
+                  "kind": "block",
+                  "type": "math_trig"
+                },
+                {
+                  "kind": "block",
+                  "type": "math_constant"
+                },
+                {
+                  "kind": "block",
+                  "type": "math_on_list"
+                },
+                {
+                  "kind": "block",
+                  "type": "math_modulo"
+                },
+                {
+                  "kind": "block",
+                  "type": "math_tostr"
+                },
+                {
+                  "kind": "block",
+                  "type": "math_constrain"
+                },
+                {
+                  "kind": "block",
+                  "type": "math_random_int"
+                },
+                {
+                  "kind": "block",
+                  "type": "math_random_float"
+                },
+                {
+                  "kind": "block",
+                  "type": "math_atan2"
+                }
+              ]
+            },
+            {
+              "kind": "category",
+              "name": "Absolute",
+              "categorystyle": "math_category",
+              "contents": [
+                {
+                  "kind": "block",
+                  "type": "math_number",
+                  "fields": {
+                    "NUM": 123
+                  }
+                },
+                {
+                  "kind": "block",
+                  "type": "infinity"
+                },
+                {
+                  "kind" : "block",
+                  "type" : "negInfinity"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "category",
+          "name": "Text",
+          "categorystyle": "text_category",
+          "contents": [
+            {
+              "kind": "category",
+              "name": "Functions",
+              "categorystyle": "text_category",
+              "contents": [
+                {
+                  "kind": "block",
+                  "type": "text_length"
+                },
+                {
+                  "kind": "block",
+                  "type": "text_print"
+                },
+                {
+                  "kind": "block",
+                  "type": "slice_text"
+                },
+                {
+                  "kind": "block",
+                  "type": "text_join"
+                },
+                {
+                  "kind": "block",
+                  "type": "text_append"
+                },
+                {
+                  "kind": "block",
+                  "type": "text_isEmpty"
+                },
+                {
+                  "kind": "block",
+                  "type": "text_indexOf"
+                },
+                {
+                  "kind": "block",
+                  "type": "text_charAt"
+                },
+                {
+                  "kind": "block",
+                  "type": "text_getSubstring"
+                },
+                {
+                  "kind": "block",
+                  "type": "text_changeCase"
+                },
+                {
+                  "kind": "block",
+                  "type": "text_trim"
+                },
+                {
+                  "kind": "block",
+                  "type": "text_count"
+                },
+                {
+                  "kind": "block",
+                  "type": "text_replace"
+                },
+                {
+                  "kind": "block",
+                  "type": "text_reverse"
+                },
+                {
+                  "kind": "block",
+                  "type": "text_prompt_ext"
+                }
+              ]
+            },
+            {
+              "kind": "category",
+              "name": "Absolute",
+              "categorystyle": "text_category",
+              "contents": [
+                {
+                  "kind": "block",
+                  "type": "text"
+                },
+                {
+                  "kind": "block",
+                  "type": "text_ms"
+                }
+              ]
+            }
+          ]
+        },
+        {
+      "kind": "category",
+      "name": "Lists",
+      "categorystyle": "lists_category",
+      "contents": [
+        {
+          "kind": "block",
+          "type": "lists_create_empty"
+        },
+        {
+          "kind": "block",
+          "type": "lists_create_with"
+        },
+        {
+          "kind": "block",
+          "type": "lists_repeat"
+        },
+        {
+          "kind": "block",
+          "type": "lists_reverse"
+        },
+        {
+          "kind": "block",
+          "type": "lists_isEmpty"
+        },
+        {
+          "kind": "block",
+          "type": "lists_length"
+        },
+        {
+          "kind": "block",
+          "type": "lists_indexOf"
+        },
+        {
+          "kind": "block",
+          "type": "lists_setIndex"
+        },
+        {
+          "kind": "block",
+          "type": "lists_getSublist"
+        },
+        {
+          "kind": "block",
+          "type": "lists_split"
+        },
+        {
+          "kind": "block",
+          "type": "lists_sort"
+        }
+      ]
+    },
+    /*
+        {
+          "kind": "category",
+          "name": "Array",
+          "categorystyle": "array_category",
+          "contents": [
+            {
+              "kind": "category",
+              "name": "Functions",
+              "categorystyle": "array_category",
+              "contents": [
+                {
+                  "kind": "block",
+                  "type": "text_length"
+                },
+                {
+                  "kind": "block",
+                  "type": "text_print"
+                },
+                {
+                  "kind": "block",
+                  "type": "slice_text"
+                }
+              ]
+            },
+            {
+              "kind": "category",
+              "name": "Absolute",
+              "categorystyle": "array_category",
+              "contents": [
+                {
+                  "kind": "block",
+                  "type": "array"
+                },
+                {
+                  "kind": "block",
+                  "type": "arrayItem"
+                }
+              ]
+            }
+          ]
+        },*/
+        {
+          "kind": "category",
+          "name": "Variables",
+          "custom": "VARIABLE",
+          "categorystyle": "var_category"
+        },
+        {
+          "kind": "category",
+          "name": "Procedures",
+          "custom": "PROCEDURE",
+          "categorystyle": "proc_category"
+        },
+        {
+          "kind": "category",
+          "name": "Slavery",
+          "categorystyle": "slave_category",
+          "hidden": "true",
+          "contents": [
+            {
+              "kind": "block",
+              "type": "makeSlave"
+            },
+            {
+              "kind": "block",
+              "type": "slaveFollow"
+            }
+          ]
+        },
+        {
+          "kind": "category",
+          "name": "Miscellaneous",
+          "categorystyle": "misc_category",
+          "contents": [
+            {
+              "kind": "block",
+              "type": "eval1"
+            },
+            {
+              "kind": "block",
+              "type": "eval2"
+            }
+          ]
+        },
+      ]
+    };
+
+
+      const theme2 = Blockly.Theme.defineTheme('light', {
+        base: Blockly.Themes.Classic,
+        startHats: true,
+        categoryStyles : {
+          "event_category": {
+            "colour": 225
+          },
+          "var_category": {
+            "colour": 330
+          },
+          "func_category": {
+            "colour": 210
+          },
+          "raw_category": {
+            "colour": 1
+          },
+          "lists_category": {
+            "colour": 255
+          },
+          "proc_category": {
+            "colour": 285
+          },
+          "slave_category": {
+            "colour": "#ff0000"
+          },
+          "misc_category": {
+            "colour": "#919191"
+          }
+      },
+      }); 
+
+      const theme = Blockly.Theme.defineTheme('dark', {
+        base: Blockly.Themes.Classic,
+        startHats: true,
+        componentStyles: {
+          workspaceBackgroundColour: '#1e1e1e',
+          toolboxBackgroundColour: 'blackBackground',
+          toolboxForegroundColour: '#fff',
+          flyoutBackgroundColour: '#252526',
+          flyoutForegroundColour: '#ccc',
+          flyoutOpacity: 1,
+          scrollbarColour: '#797979',
+          insertionMarkerColour: '#fff',
+          insertionMarkerOpacity: 0.3,
+          scrollbarOpacity: 0.4,
+          cursorColour: '#d0d0d0',
+          blackBackground: '#333',
+        },
+        categoryStyles : {
+          "event_category": {
+            "colour": 225
+          },
+          "var_category": {
+            "colour": 330
+          },
+          "func_category": {
+            "colour": 210
+          },
+          "raw_category": {
+            "colour": 1
+          },
+          "lists_category": {
+            "colour": 255
+          },
+          "proc_category": {
+            "colour": 285
+          },
+          "slave_category": {
+            "colour": "#ff0000"
+          },
+          "misc_category": {
+            "colour": "#919191"
+          }
+      },
+      }); 
+      
+      var demoWorkspace = Blockly.inject('blocklyDiv', {
+        toolbox: toolbox,
+        theme: 'dark',
+        grid:{spacing: 20,length: 3,colour: '#4d4d4d',snap: true},
+        trashcan: true
+      });
+
+      function save() {
+        const state = Blockly.serialization.workspaces.save(demoWorkspace);
+        localStorage.setItem('workspace-state', JSON.stringify(state));
+      }
+
+      function load() {
+        const state = localStorage.getItem('workspace-state');
+        Blockly.serialization.workspaces.load(JSON.parse(state), demoWorkspace);
+      }
+      //demoWorkspace.addChangeListener(Blockly.Events.disableOrphans);
+
+      Blockly.common.defineBlocksWithJsonArray([{
+        "type": "slice_text",
+        "tooltip": "Slice text",
+        "helpUrl": "",
+        "message0": "Slice text %1 from %2 to %3",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "text",
+            "align": "RIGHT",
+            "check": "String"
+            },
+            {
+            "type": "input_value",
+            "name": "pos1",
+            "align": "RIGHT",
+            "check": "Number"
+            },
+            {
+            "type": "input_value",
+            "name": "pos2",
+            "align": "RIGHT",
+            "check": "Number"
+            }
+            ],
+            "output": "String",
+            "colour": 165
+          },{
+            "type": "init",
+            "tooltip": "Runs at start of program",
+            "helpUrl": "",
+            "message0": "on start %1",
+            "args0": [
+              {
+                "type": "input_dummy",
+                "name": "NAME"
+              }
+            ],
+            "nextStatement": null,
+            "colour": 225
+          },{
+            "type": "text_print",
+            "tooltip": "Alerts user",
+            "helpUrl": "",
+            "message0": "alert %1",
+            "args0": [
+              {
+                "type": "input_value",
+                "name": "TEXT",
+                "align": "RIGHT"
+              }
+            ],
+            "previousStatement": null,
+            "nextStatement": null,
+            "colour": 165
+          },{
+            "type": "function",
+            "tooltip": "Creates a JavaScript function",
+            "helpUrl": "",
+            "message0": "new function %1 %2 %3",
+            "args0": [
+              {
+                "type": "field_input",
+                "name": "FNAME",
+                "text": "hello"
+              },
+              {
+                "type": "input_dummy",
+                "name": "NAME"
+              },
+              {
+                "type": "input_statement",
+                "name": "CODE"
+              }
+            ],
+            "previousStatement": null,
+            "nextStatement": null,
+            "colour": 210
+          },{
+            "type": "runfunction",
+            "tooltip": "Runs a JavaScript function",
+            "helpUrl": "",
+            "message0": "run function %1 %2",
+            "args0": [
+              {
+                "type": "field_input",
+                "name": "FNAME",
+                "text": "hello"
+              },
+              {
+                "type": "input_dummy",
+                "name": "NAME"
+              }
+            ],
+            "previousStatement": null,
+            "nextStatement": null,
+            "colour": 210
+          },{
+            "type": "array",
+            "tooltip": "Creates a JavaScript array",
+            "helpUrl": "",
+            "message0": "array %1",
+            "args0": [
+              {
+                "type": "input_statement",
+                "name": "CODE"
+              }
+            ],
+            "output": "Array",
+            "colour": 55
+          },{
+            "type": "arrayItem",
+            "tooltip": "Returns an array item",
+            "helpUrl": "",
+            "message0": "array item %1",
+            "args0": [
+              {
+                "type": "field_input",
+                "name": "FNAME",
+                "text": "hello"
+              },
+            ],
+            "previousStatement": null,
+            "nextStatement": null,
+            "colour": 55
+          },{
+            "type": "join",
+            "tooltip": "Joins text",
+            "helpUrl": "",
+            "message0": "join %1 %2",
+            "args0": [
+              {
+                "type": "input_value",
+                "name": "1",
+                "align": "RIGHT"
+              },
+              {
+                "type": "input_value",
+                "name": "2",
+                "align": "RIGHT"
+              },
+            ],
+            "output": null,
+            "colour": 165
+          },{
+            "type": "keypress",
+            "tooltip": "Runs code when a key is pressed",
+            "helpUrl": "",
+            "message0": "when key %1 is pressed %2 %3",
+            "args0": [
+              {
+                "type": "field_dropdown",
+                "name": "KEY",
+                "options": [
+                  [
+                    "a",
+                    "a"
+                  ],
+                  [
+                    "b",
+                    "b"
+                  ],
+                  [
+                    "c",
+                    "c"
+                  ],
+                  [
+                    "d",
+                    "d"
+                  ],
+                  [
+                    "e",
+                    "e"
+                  ],
+                  [
+                    "f",
+                    "f"
+                  ],
+                  [
+                    "g",
+                    "g"
+                  ],
+                  [
+                    "h",
+                    "h"
+                  ],
+                  [
+                    "i",
+                    "i"
+                  ],
+                  [
+                    "j",
+                    "j"
+                  ],
+                  [
+                    "k",
+                    "k"
+                  ],
+                  [
+                    "l",
+                    "l"
+                  ],
+                  [
+                    "m",
+                    "m"
+                  ],
+                  [
+                    "n",
+                    "n"
+                  ],
+                  [
+                    "o",
+                    "o"
+                  ],
+                  [
+                    "p",
+                    "p"
+                  ],
+                  [
+                    "q",
+                    "q"
+                  ],
+                  [
+                    "r",
+                    "r"
+                  ],
+                  [
+                    "s",
+                    "s"
+                  ],
+                  [
+                    "t",
+                    "t"
+                  ],
+                  [
+                    "u",
+                    "u"
+                  ],
+                  [
+                    "v",
+                    "x"
+                  ],
+                  [
+                    "w",
+                    "w"
+                  ],
+                  [
+                    "x",
+                    "x"
+                  ],
+                  [
+                    "y",
+                    "y"
+                  ],
+                  [
+                    "z",
+                    "z"
+                  ],
+                  [
+                    {
+                      "src": "https://static.thenounproject.com/png/44496-200.png",
+                      "width": 15,
+                      "height": 15,
+                      "alt": "enter"
+                    },
+                    "enter"
+                  ]
+                ]
+              },
+              {
+                "type": "input_dummy",
+                "name": "NAME"
+              },
+              {
+                "type": "input_statement",
+                "name": "CODE"
+              }
+            ],
+            "colour": 225
+          },
+          {
+            "type": "pic",
+            "tooltip": "Returns a picture",
+            "helpUrl": "",
+            "message0": "picture %1 %2",
+            "args0": [
+              {
+                "type": "field_dropdown",
+                "name": "PIC",
+                "options": [
+                  [
+                    "Mutt mutt",
+                    "mutt.svg"
+                  ],
+                  [
+                    "Whip",
+                    "whip.png"
+                  ],
+                  [
+                    "Slave leader mutt",
+                    "slaver.png"
+                  ]
+                ]
+              },
+              {
+                "type": "input_dummy",
+                "name": "NAME"
+              }
+            ],
+            "output": null,
+            "colour": 0
+          },{
+            "type": "placeAt",
+            "tooltip": "Places sprite at position",
+            "helpUrl": "",
+            "message0": "place sprite %1 sprite %2 %3 x %4 y %5",
+            "args0": [
+              {
+                "type": "input_dummy",
+                "name": "NAME"
+              },
+              {
+                "type": "field_input",
+                "name": "SPRITE",
+                "text": "default"
+              },
+              {
+                "type": "input_dummy",
+                "name": "SPRITE",
+                "align": "RIGHT"
+              },
+              {
+                "type": "input_value",
+                "name": "X",
+                "align": "RIGHT",
+                "check": "Number"
+              },
+              {
+                "type": "input_value",
+                "name": "Y",
+                "align": "RIGHT",
+                "check": "Number"
+              }
+            ],
+            "previousStatement": null,
+            "nextStatement": null,
+            "colour": 0
+          },{
+            "type": "newSprite",
+            "tooltip": "Creates a new sprite",
+            "helpUrl": "",
+            "message0": "new sprite %1 %2 picture %3 scale %4",
+            "args0": [
+              {
+                "type": "input_dummy",
+                "name": "NAME"
+              },
+              {
+                "type": "field_input",
+                "name": "SPRITE",
+                "text": "default"
+              },
+              {
+                "type": "input_value",
+                "name": "N2",
+                "align": "RIGHT"
+              },
+              {
+                "type": "input_value",
+                "name": "SCALE",
+                "align": "RIGHT"
+              }
+            ],
+            "previousStatement": null,
+            "nextStatement": null,
+            "colour": 0
+          },{
+            "type": "makeSlave",
+            "tooltip": "Makes a sprite slave of another sprite.",
+            "helpUrl": "",
+            "message0": "make %1 slave of %2 %3",
+            "args0": [
+              {
+                "type": "field_input",
+                "name": "SLAVE",
+                "text": "sprite1"
+              },
+              {
+                "type": "field_input",
+                "name": "LEADER",
+                "text": "sprite2"
+              },
+              {
+                "type": "input_dummy",
+                "name": "NAME"
+              }
+            ],
+            "previousStatement": null,
+            "nextStatement": null,
+            "colour": "#ff0000"
+          },{
+            "type": "slaveFollow",
+            "tooltip": "Makes slave follow leader",
+            "helpUrl": "",
+            "message0": "make %1 follow owner %2",
+            "args0": [
+              {
+                "type": "field_input",
+                "name": "SLAVE",
+                "text": "sprite1"
+              },
+              {
+                "type": "input_dummy",
+                "name": "NAME"
+              }
+            ],
+            "previousStatement": null,
+            "nextStatement": null,
+            "colour": "#ff0000"
+          },{
+            "type": "drawRect",
+            "tooltip": "Draws a rectangle at given position of given size.",
+            "helpUrl": "",
+            "message0": "draw rectangle %1 from X %2 from Y %3 to X %4 to Y %5 color %6 %7",
+            "args0": [
+              {
+                "type": "input_dummy",
+                "name": "NAME"
+              },
+              {
+                "type": "input_value",
+                "name": "X",
+                "align": "RIGHT"
+              },
+              {
+                "type": "input_value",
+                "name": "Y",
+                "align": "RIGHT"
+              },
+              {
+                "type": "input_value",
+                "name": "TX",
+                "align": "RIGHT"
+              },
+              {
+                "type": "input_value",
+                "name": "TY",
+                "align": "RIGHT"
+              },
+              {
+                "type": "field_dropdown",
+                "name": "COLOR",
+                "options": [
+                  [
+                    "black",
+                    "#000000"
+                  ],
+                  [
+                    "white",
+                    "#ffffff"
+                  ],
+                  [
+                    "red",
+                    "#ff0000"
+                  ],
+                  [
+                    "green",
+                    "#00ff00"
+                  ],
+                  [
+                    "blue",
+                    "#0000ff"
+                  ],
+                  [
+                    "cyan",
+                    "#00ffff"
+                  ],
+                  [
+                    "pink",
+                    "#ff00ff"
+                  ],
+                  [
+                    "yellow",
+                    "#ffff00"
+                  ]
+                ]
+              },
+              {
+                "type": "input_dummy",
+                "name": "COLOR",
+                "align": "RIGHT"
+              }
+            ],
+            "previousStatement": null,
+            "nextStatement": null,
+            "colour": 0,
+            "inputsInline": false
+          },{
+            "type": "math_random",
+            "tooltip": "Outputs a random number",
+            "helpUrl": "",
+            "message0": "random %1 minimum %2 maximum %3",
+            "args0": [
+              {
+                "type": "input_dummy",
+                "name": "NAME"
+              },
+              {
+                "type": "input_value",
+                "name": "MIN",
+                "align": "RIGHT",
+                "check": "Number"
+              },
+              {
+                "type": "input_value",
+                "name": "MAX",
+                "align": "RIGHT",
+                "check": "Number"
+              }
+            ],
+            "output": null,
+            "colour": 225,
+            "inputsInline": true
+          },{
+            "type": "eval1",
+            "tooltip": "Evaluates code",
+            "helpUrl": "",
+            "message0": "evaluate code %1",
+            "args0": [
+              {
+                "type": "input_value",
+                "name": "CODE"
+              }
+            ],
+            "output": null,
+            "colour": "#919191"
+          },{
+            "type": "eval2",
+            "tooltip": "Evaluates code",
+            "helpUrl": "",
+            "message0": "evaluate code %1",
+            "args0": [
+              {
+                "type": "input_value",
+                "name": "CODE"
+              }
+            ],
+            "previousStatement": null,
+            "nextStatement": null,
+            "colour": "#919191"
+          },{
+            "type": "math_tostr",
+            "tooltip": "Converts numbers to a string",
+            "helpUrl": "",
+            "message0": "convert to string %1",
+            "args0": [
+              {
+                "type": "input_value",
+                "name": "STR"
+              }
+            ],
+            "output": null,
+            "colour": 225
+          },{
+            "type": "text_ms",
+            "tooltip": "A letter, word, or line of text.",
+            "helpUrl": "",
+            "message0": "` %1 ` %2",
+            "args0": [
+              {
+                "type": "field_input",
+                "name": "TEXT",
+                "text": ""
+              },
+              {
+                "type": "input_dummy",
+                "name": "NAME"
+              }
+            ],
+            "output": null,
+            "colour": 165
+          },{
+            "type": "text_ask",
+            "tooltip": "Asks user for input",
+            "helpUrl": "",
+            "message0": "ask %1",
+            "args0": [
+              {
+                "type": "input_value",
+                "name": "TEXT"
+              }
+            ],
+            "output": null,
+            "colour": 165
+          },{
+            "type": "delayRun",
+            "tooltip": "Runs code repeatedly until program is stopped.",
+            "helpUrl": "",
+            "message0": "forever %1 %2",
+            "args0": [
+              {
+                "type": "input_dummy",
+                "name": "NAME"
+              },
+              {
+                "type": "input_statement",
+                "name": "CODE"
+              }
+            ],
+            "colour": 225
+          },{
+            "type": "infinity",
+            "tooltip": "Returns Infinity",
+            "helpUrl": "",
+            "message0": "infinity (∞) %1",
+            "args0": [
+              {
+                "type": "input_dummy",
+                "name": "NAME"
+              }
+            ],
+            "output": null,
+            "colour": 225
+          },{
+            "type": "negInfinity",
+            "tooltip": "Returns negative Infinity ",
+            "helpUrl": "",
+            "message0": "negative infinity (-∞)  %1",
+            "args0": [
+              {
+                "type": "input_dummy",
+                "name": "NAME"
+              }
+            ],
+            "output": null,
+            "colour": 225
+          }
+        ]
+      );
+
+      function isInsideIframe(){try{return window.self!==window.top}catch(e){return true}}
+      
+      function getRandomInt(min,max){const minCeiled=Math.ceil(min);const maxFloored=Math.floor(max);return Math.floor(Math.random()*(maxFloored-minCeiled)+minCeiled)}
+      
+      var code2 = `function getRandomInt(min,max){const minCeiled=Math.ceil(min);const maxFloored=Math.floor(max);return Math.floor(Math.random()*(maxFloored-minCeiled)+minCeiled)} function isInsideIframe(){try{return window.self!==window.top}catch(e){return true}} function evalC(code){if(isInsideIframe()){console.warn("This website is running as an embed! Please got to https://muttcode.glitch.me to run 'eval' statements.");return eval("")}else{return eval(code)}} const playground=draw.group();var sprites=playground.group();function clearCanvas(){var rect=draw.rect(210,210).attr({fill:'#fff'})}function newSprite(pic,scale){let bbe=sprites.image(pic);bbe.size(scale,scale).move(20,20);return bbe}`;
+
+      /*function evalC(code) {
+        if (isInsideIframe()) {
+          console.warn("This website is running in an IFrame/embed! Please got to https://muttcode.glitch.me to run 'eval' statements.");
+          return eval("");
+        } else {
+          return eval(code);
+        }
+      }*/
+
+      Blockly.Extensions.register('dynamic_menu_extension',
+        function() {
+          this.getInput('INPUT')
+            .appendField(new Blockly.FieldDropdown(
+              function() {
+                var options = [];
+                var now = Date.now();
+                for(var i = 0; i < 7; i++) {
+                  var dateString = String(new Date(now)).substring(0, 3);
+                  options.push([dateString, dateString.toUpperCase()]);
+                  now += 24 * 60 * 60 * 1000;
+                }
+                return options;
+              }), 'DAY');
+        });
+
+      const Order = {
+        ATOMIC: 0,
+      };
+
+      javascript.javascriptGenerator.forBlock['keypress'] = function(block) {
+        const key = block.getFieldValue('KEY');
+        const code = javascript.javascriptGenerator.statementToCode(block, 'CODE');
+        return `
+        document.addEventListener('keydown', function handler(event) {
+        if (document.getElementById('handle').value === 'NO') {
+        this.removeEventListener('keydown', handler);
+        console.log('Removed event handler, project stopped/inactive.');
+        } else if (event.key === '${key}' || event.key === '${key.toUpperCase()}') {${code}}; 
+        }
+        );`;
+      };
+
+      javascript.javascriptGenerator.forBlock['delayRun'] = function(block) {
+        const code = javascript.javascriptGenerator.statementToCode(block, 'CODE');
+        var ft3 = getRandomInt(1111111111,9999999999);
+        return `function func${ft3}() {if (rnu44238df83hh) {${code}} setTimeout(() => func${ft3}(), 10);} func${ft3}();`;
+      };
+
+      javascript.javascriptGenerator.forBlock['math_random'] = function(block) {
+        const a1 = javascript.javascriptGenerator.valueToCode(block, 'MIN', Order.ATOMIC);
+        const a2 = javascript.javascriptGenerator.valueToCode(block, 'MAX', Order.ATOMIC);
+        return [`getRandomInt(${a1},${a2})`,Order.ATOMIC];
+      };
+
+      javascript.javascriptGenerator.forBlock['math_tostr'] = function(block) {
+        const a1 = javascript.javascriptGenerator.valueToCode(block, 'STR', Order.ATOMIC);
+        return [`'${a1}'`,Order.ATOMIC];
+      };
+
+      javascript.javascriptGenerator.forBlock['infinity'] = function(block) {
+        return [`Number.POSITIVE_INFINITY`,Order.ATOMIC];
+      };
+
+      javascript.javascriptGenerator.forBlock['negInfinity'] = function(block) {
+        return [`Number.NEGATIVE_INFINITY`,Order.ATOMIC];
+      };
+
+      
+      javascript.javascriptGenerator.forBlock['text_ms'] = function(block) {
+        const a1 = block.getFieldValue('TEXT');
+        return [`\`${a1}\``,Order.ATOMIC];
+      };
+
+      javascript.javascriptGenerator.forBlock['eval1'] = function(block) {
+        const a1 = javascript.javascriptGenerator.valueToCode(block, 'CODE', Order.ATOMIC);
+        return [`evalC(${a1})`,Order.ATOMIC];
+      };
+
+      javascript.javascriptGenerator.forBlock['eval2'] = function(block) {
+        const a1 = javascript.javascriptGenerator.valueToCode(block, 'CODE', Order.ATOMIC);
+        return `evalC(${a1});`;
+      };
+
+      javascript.javascriptGenerator.forBlock['init'] = function(block) {
+        return '';
+      };
+
+      javascript.javascriptGenerator.forBlock['newSprite'] = function(block) {
+        const name = block.getFieldValue('SPRITE');
+        const pic = javascript.javascriptGenerator.valueToCode(block, 'N2', Order.ATOMIC);
+        const scale = javascript.javascriptGenerator.valueToCode(block, 'SCALE', Order.ATOMIC);
+        return `var ${name.replace("'","")} = newSprite(${pic},${scale});\n`;
+      };
+
+      javascript.javascriptGenerator.forBlock['drawRect'] = function(block) {
+        const color = block.getFieldValue('COLOR');
+        const x = javascript.javascriptGenerator.valueToCode(block, 'X', Order.ATOMIC);
+        const y = javascript.javascriptGenerator.valueToCode(block, 'Y', Order.ATOMIC);
+        const tx = javascript.javascriptGenerator.valueToCode(block, 'TX', Order.ATOMIC);
+        const ty = javascript.javascriptGenerator.valueToCode(block, 'TY', Order.ATOMIC);
+        return `var rect = draw.rect(${tx}, ${ty}).attr({fill: '${color}'});\nrect.center(${x}, ${y});\n`;
+      };
+
+      javascript.javascriptGenerator.forBlock['join'] = function(block) {
+        const a1 = javascript.javascriptGenerator.valueToCode(block, '1', Order.ATOMIC);
+        const a2 = javascript.javascriptGenerator.valueToCode(block, '2', Order.ATOMIC);
+        return [`${a1}+${a2}`,Order.ATOMIC];
+      };
+
+      javascript.javascriptGenerator.forBlock['pic'] = function(block) {
+        const pic = block.getFieldValue('PIC');
+        return [`'${pic}'`,Order.ATOMIC];
+      };
+
+      /*javascript.javascriptGenerator.forBlock['sprite'] = function(block) {
+        const name = javascript.javascriptGenerator.valueToCode(block, 'NAME', Order.ATOMIC);
+        const pic = javascript.javascriptGenerator.valueToCode(block, 'PIC', Order.ATOMIC);
+        return `sprites.push([${name},${pic},0,0]);`;
+      };*/
+
+      javascript.javascriptGenerator.forBlock['placeAt'] = function(block) {
+        const name = block.getFieldValue('SPRITE');
+        const x = javascript.javascriptGenerator.valueToCode(block, 'X', Order.ATOMIC);
+        const y = javascript.javascriptGenerator.valueToCode(block, 'Y', Order.ATOMIC);
+        return `${name.replace("'","")}.center(${x},${y});`;
+      };
+
+      javascript.javascriptGenerator.forBlock['array'] = function(block) {
+        const code = javascript.javascriptGenerator.statementToCode(block, 'CODE');
+        return [`[${code}]`,Order.ATOMIC];
+      };
+
+      javascript.javascriptGenerator.forBlock['function'] = function(block) {
+        const textValue = block.getFieldValue('FNAME');
+        const code = javascript.javascriptGenerator.statementToCode(block, 'CODE');
+        return `function ${textValue}() {\n${code}\n}\n`;
+      };
+
+      javascript.javascriptGenerator.forBlock['arrayItem'] = function(block) {
+        const textValue = block.getFieldValue('FNAME');
+        return `${textValue},`;
+      };
+
+      javascript.javascriptGenerator.forBlock['runfunction'] = function(block) {
+        const textValue = block.getFieldValue('FNAME');
+        return `${textValue}();\n`;
+      };
+
+      javascript.javascriptGenerator.forBlock['slice_text'] = function(block) {
+        const textValue = javascript.javascriptGenerator.valueToCode(block, 'text', Order.ATOMIC);
+        const pos1 = javascript.javascriptGenerator.valueToCode(block, 'pos1', Order.ATOMIC);
+        const pos2 = javascript.javascriptGenerator.valueToCode(block, 'pos2', Order.ATOMIC);
+        const code = `"${textValue}".slice(${pos1},${pos2})`;
+        console.log(`"${textValue}".slice(${pos1},${pos2})`);
+        return [code, Order.ATOMIC];
+      };
+
+      // setTimeout(() => code(), delay);
+
+      var rnu44238df83hh = false;
+      
+      var startBlocks = {
+        blocks: {
+          languageVersion: 0,
+          blocks: [
+            {
+              type: 'init',
+              inline: false,
+              inputs: {
+              }
+            }
+          ]
+        }
+      };
+      Blockly.serialization.workspaces.load(startBlocks, demoWorkspace);
+
+      function showCode() {
+        // Generate JavaScript code and display it.
+        javascript.javascriptGenerator.INFINITE_LOOP_TRAP = null;
+        var code =
+          javascript.javascriptGenerator.workspaceToCode(demoWorkspace);
+        console.log(code2 + code);
+        document.getElementById('jsv').innerHTML = code2 + code;
+      }
+      function stop() {
+        document.getElementById('handle').value = 'NO';
+        rnu44238df83hh = false;
+        clearCanvas()
+      }
+      
+      function runCode() {
+        window.LoopTrap = 1000;
+        javascript.javascriptGenerator.INFINITE_LOOP_TRAP =
+          'if (--window.LoopTrap < 0) throw "Infinite loop, cannot run code. Try using the delay block.";\n';
+        var code =
+          javascript.javascriptGenerator.workspaceToCode(demoWorkspace);
+        javascript.javascriptGenerator.INFINITE_LOOP_TRAP = null;
+        try {
+          clearCanvas()
+          document.getElementById('handle').value = 'YES';
+          code = code2 + code;
+          rnu44238df83hh = true;
+          console.log("Running code:\n"+code);
+          eval(code);
+        } catch (e) {
+          clearCanvas()
+          document.getElementById('handle').value = 'NO';
+          console.error(e);
+        }
+      }
+    </script>
+  </body>
+</html>
