@@ -1292,6 +1292,16 @@ sprite.size(scale, scale).move(20, 20);
         return [`\`${a1}\``,Order.ATOMIC];
       };
 
+      javascript.javascriptGenerator.forBlock['1010pixelGrid'] = function(block) {
+        const a1 = block.getFieldValue('GRIDBLK');
+        return [`${a1}`,Order.ATOMIC];
+      };
+
+      javascript.javascriptGenerator.forBlock['55pixelGrid'] = function(block) {
+        const a1 = block.getFieldValue('GRIDBLK');
+        return [`${a1}`,Order.ATOMIC];
+      };
+
       javascript.javascriptGenerator.forBlock['eval1'] = function(block) {
         const a1 = javascript.javascriptGenerator.valueToCode(block, 'CODE', Order.ATOMIC);
         return [`evalC(${a1})`,Order.ATOMIC];
