@@ -1163,7 +1163,7 @@ sprite.size(scale, scale).move(20, 20);
             "type": "1010pixelGrid",
             "tooltip": "Returns a 10x10 pixel grid.",
             "helpUrl": "",
-            "message0": "10x10 %1 %2",
+            "message0": "10x10 %1",
             "args0": [
               {
                 type: 'field_bitmap',
