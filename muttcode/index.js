@@ -1,3 +1,7 @@
+/* 
+Copyright 2024 AzureTecDevs
+Use of this code comes with the Blue Oak Model license; if not included contact azuretecdevs@gmail.com.
+*/
 document.getElementById("Blocks").style.display = "block";
       document.getElementById("btn11").click();
       /*
