@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+    <head>
+    <style>
+      body {
+        font-family: Arial;
+      }
+      h1 {
+        font-weight: normal;
+        font-size: 140%;
+      }
+      button {
+        border-radius: 3px;
+        border: 2px solid rgb(200,200,200);
+        padding: 4px;
+        background-color: rgb(240,240,240);
+        font-weight: 400;
+        font-style: normal;
+      }
+      button:hover {
+        border-radius: 3px;
+        border: 2px solid rgb(0,200,200);
+        padding: 4px;
+        background-color: rgb(230,230,230);
+      }
+      #iframe {
+        border: 2px solid #000;
+        padding: 0px;
+      }
+      .hiddden {
+        display: none;
+      }
+      .show {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" onchange="colorSet();" id="inp">
+    <script>
+        function colorSet() {
+            document.getElementById('body').style.color = document.getElementById('inp').value;
+        }
+    </script>
+  </body>
+</html>
