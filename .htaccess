@@ -1,2 +1,2 @@
 ErrorDocument 404 /404.html
-Redirect /LICENSE.md /LICENSE.html
+Redirect LICENSE.md LICENSE.html
