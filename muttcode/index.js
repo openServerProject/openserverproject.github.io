@@ -1172,8 +1172,8 @@ sprite.size(scale, scale).move(20, 20);
                 height: 10,
                 randomize: false,
                 clear: true,
-                filled: '#000',
-                empty: '#fff'
+                filled: '#000000',
+                empty: '#ffffff'
               }
             ],
             "output": null,
