@@ -811,11 +811,11 @@ sprite.size(scale, scale).move(20, 20);
                   ],
                   [
                     "Whip",
-                    "whip.png"
+                    "whip.svg"
                   ],
                   [
                     "Slave leader mutt",
-                    "slaver.png"
+                    "slaver.svg"
                   ]
                 ]
               },
