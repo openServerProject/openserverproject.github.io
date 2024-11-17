@@ -1292,6 +1292,25 @@ sprite.size(scale, scale).move(20, 20);
         return [`\`${a1}\``,Order.ATOMIC];
       };
 
+      function for55(grid) {
+        let listChar = [];
+        let currentIndex = 0;
+        let currentCharIndex = 0;
+        let currJoined = '';
+        let currUnjoined = [];
+        grid.forEach(element => {
+          currentIndex = currentIndex + 1;
+          currUnjoined.push(grid[currentIndex]);
+          if (currentCharIndex === 4) {
+            currentCharIndex = 0;
+            currJoined.push(currUnjoined.join(''));
+          } else {
+            currentCharIndex = currentCharIndex + 1;
+          }
+        });
+        return listChar.join(',');
+      }
+      // names.forEach((name, index) => rollCall(name, index)); 
       javascript.javascriptGenerator.forBlock['1010pixelGrid'] = function(block) {
         const a1 = block.getFieldValue('GRIDBLK');
         return [`${a1}`,Order.ATOMIC];
