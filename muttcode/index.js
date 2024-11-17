@@ -536,6 +536,10 @@ sprite.size(scale, scale).move(20, 20);
             {
               "kind": "block",
               "type": "1010pixelGrid"
+            },
+            {
+              "kind": "block",
+              "type": "55pixelGrid"
             }
           ]
         },
@@ -1170,15 +1174,42 @@ sprite.size(scale, scale).move(20, 20);
                 name: 'GRIDBLK',
                 width: 10,
                 height: 10,
-                randomize: false,
-                clear: true,
-                filled: '#000000',
-                empty: '#ffffff'
+                buttons: {
+                  randomize: false,
+                  clear: false,
+                },
+                colours: {
+                  filled: '#000',
+                  empty: '#fff',
+                }
               }
             ],
             "output": null,
             "colour": "#919191"
-          }          
+          },{
+            "type": "55pixelGrid",
+            "tooltip": "Returns a 5x5 pixel grid.",
+            "helpUrl": "",
+            "message0": "5x5 %1",
+            "args0": [
+              {
+                type: 'field_bitmap',
+                name: 'GRIDBLK',
+                width: 5,
+                height: 5,
+                buttons: {
+                  randomize: false,
+                  clear: false,
+                },
+                colours: {
+                  filled: '#000',
+                  empty: '#fff',
+                }
+              }
+            ],
+            "output": null,
+            "colour": "#919191"
+          }         
         ]
       );
 
