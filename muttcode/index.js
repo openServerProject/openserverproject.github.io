@@ -1170,6 +1170,10 @@ sprite.size(scale, scale).move(20, 20);
                 name: 'GRIDBLK',
                 width: 10,
                 height: 10,
+                randomize: false,
+                clear: true,
+                filled: '#000',
+                empty: '#fff'
               }
             ],
             "output": null,
