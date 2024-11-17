@@ -532,6 +532,10 @@ sprite.size(scale, scale).move(20, 20);
             {
               "kind": "block",
               "type": "eval2"
+            },
+            {
+              "kind": "block",
+              "type": "1010pixelGrid"
             }
           ]
         },
@@ -1155,7 +1159,26 @@ sprite.size(scale, scale).move(20, 20);
             ],
             "output": null,
             "colour": 225
-          }
+          },{
+            "type": "1010pixelGrid",
+            "tooltip": "Returns a 10x10 pixel grid.",
+            "helpUrl": "",
+            "message0": "10x10 %1",
+            "args0": [
+              {
+                "type": "input_dummy",
+                "name": "NAME"
+              },
+              {
+                type: 'field_bitmap',
+                name: 'FIELDNAME',
+                width: 10,
+                height: 10,
+              }
+            ],
+            "output": null,
+            "colour": "#919191"
+          }          
         ]
       );
 
