@@ -1167,7 +1167,7 @@ sprite.size(scale, scale).move(20, 20);
             "args0": [
               {
                 type: 'field_bitmap',
-                name: 'GRID',
+                name: 'GRIDBLK',
                 width: 10,
                 height: 10,
               }
