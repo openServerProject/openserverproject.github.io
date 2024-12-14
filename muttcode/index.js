@@ -1476,12 +1476,12 @@ sprite.size(scale, scale).move(20, 20);
 
       javascript.javascriptGenerator.forBlock['gx22'] = function(block) {
         const a1 = block.getFieldValue('SPRITE');
-        return [`${a1}.attr("cx")`,Order.ATOMIC];
+        return [`${a1}.cx()`,Order.ATOMIC];
       };
 
       javascript.javascriptGenerator.forBlock['gy22'] = function(block) {
         const a1 = block.getFieldValue('SPRITE');
-        return [`${a1}.attr("cy")`,Order.ATOMIC];
+        return [`${a1}.cy()`,Order.ATOMIC];
       };
 
       javascript.javascriptGenerator.forBlock['1010pixelGrid'] = function(block) {
