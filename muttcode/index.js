@@ -164,11 +164,11 @@ sprite.size(scale, scale).move(20, 20);
                 },
                 {
                   "kind": "block",
-                  "type": "gx"
+                  "type": "gx22"
                 },
                 {
                   "kind": "block",
-                  "type": "gy"
+                  "type": "gy22"
                 }
               ]
             }
