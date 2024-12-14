@@ -151,6 +151,16 @@ sprite.size(scale, scale).move(20, 20);
           ]
         },{
               "kind": "category",
+              "name": "Looks",
+              "categorystyle": "raw_category",
+              "contents": [
+                {
+                  "kind": "block",
+                  "type": "setcss"
+                }
+              ]
+            },{
+              "kind": "category",
               "name": "Data",
               "categorystyle": "raw_category",
               "contents": [
@@ -1306,7 +1316,41 @@ sprite.size(scale, scale).move(20, 20);
             ],
             "output": null,
             "colour": 0
-          }                            
+          },
+          {
+            "type": "setcss",
+            "tooltip": "Sets the cursor shown when hovered over sprite",
+            "helpUrl": "",
+            "message0": "set cursor of %1 to %2 %3",
+            "args0": [
+              {
+                "type": "field_input",
+                "name": "SPRITE",
+                "text": "sprite"
+              },
+              {
+                "type": "field_dropdown",
+                "name": "CURSOR",
+                "options": [
+                  [
+                    "pointer",
+                    "pointer"
+                  ],
+                  [
+                    "default",
+                    "default"
+                  ]
+                ]
+              },
+              {
+                "type": "input_dummy",
+                "name": "NAME"
+              }
+            ],
+            "previousStatement": null,
+            "nextStatement": null,
+            "colour": 0
+          }
         ]
       );
 
@@ -1369,6 +1413,12 @@ sprite.size(scale, scale).move(20, 20);
         } else if (event.target.id === '${key}BTN' || event.target.id === '${key.toUpperCase()}BTN') {${code}}; 
         }
         );`;
+      };
+
+      javascript.javascriptGenerator.forBlock['setcss'] = function(block) {
+        const key = block.getFieldValue('SPRITE');
+        const code = block.getFieldValue('CURSOR');
+        return `${key}.css('cursor', '${code}')`;
       };
 
       javascript.javascriptGenerator.forBlock['delayRun'] = function(block) {
