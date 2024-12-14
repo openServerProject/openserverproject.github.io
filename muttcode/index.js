@@ -815,7 +815,7 @@ sprite.size(scale, scale).move(20, 20);
             "type": "onButtonPress",
             "tooltip": "Runs code when a button is pressed",
             "helpUrl": "",
-            "message0": "when %1 is pressed %2 %3",
+            "message0": "when on-screen button %1 is pressed %2 %3",
             "args0": [
               {
                 "type": "field_dropdown",
