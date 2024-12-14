@@ -1422,12 +1422,12 @@ sprite.size(scale, scale).move(20, 20);
       }
       // names.forEach((name, index) => rollCall(name, index)); 
 
-      javascript.javascriptGenerator.forBlock['gx'] = function(block) {
+      javascript.javascriptGenerator.forBlock['gx22'] = function(block) {
         const a1 = block.getFieldValue('SPRITE');
         return [`${a1}.x`,Order.ATOMIC];
       };
 
-      javascript.javascriptGenerator.forBlock['gy'] = function(block) {
+      javascript.javascriptGenerator.forBlock['gy22'] = function(block) {
         const a1 = block.getFieldValue('SPRITE');
         return [`${a1}.y`,Order.ATOMIC];
       };
