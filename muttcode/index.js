@@ -1426,7 +1426,7 @@ sprite.size(scale, scale).move(20, 20);
 
       javascript.javascriptGenerator.forBlock['gx22'] = function(block) {
         const a1 = block.getFieldValue('SPRITE');
-        return [`${a1}.attr("x")`,Order.ATOMIC];
+        return [`${a1}.attr("x")*${a1}.width()`,Order.ATOMIC];
       };
 
       javascript.javascriptGenerator.forBlock['gy22'] = function(block) {
