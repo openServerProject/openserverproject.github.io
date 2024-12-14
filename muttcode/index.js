@@ -108,6 +108,10 @@ sprite.size(scale, scale).move(20, 20);
         },
         {
           "kind": "block",
+          "type": "onButtonPress"
+        },
+        {
+          "kind": "block",
           "type": "delayRun"
         }
       ]
@@ -808,6 +812,53 @@ sprite.size(scale, scale).move(20, 20);
             "colour": 225
           },
           {
+            "type": "onButtonPress",
+            "tooltip": "Runs code when a button is pressed",
+            "helpUrl": "",
+            "message0": "when %1 is pressed %2 %3",
+            "args0": [
+              {
+                "type": "field_dropdown",
+                "name": "KEY",
+                "options": [
+                  [
+                    "a",
+                    "a"
+                  ],
+                  [
+                    "b",
+                    "b"
+                  ],
+                  [
+                    "x",
+                    "x"
+                  ],
+                  [
+                    "y",
+                    "y"
+                  ],
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "2"
+                  ]
+                ]
+              },
+              {
+                "type": "input_dummy",
+                "name": "NAME"
+              },
+              {
+                "type": "input_statement",
+                "name": "CODE"
+              }
+            ],
+            "colour": 225
+          },          
+          {
             "type": "pic",
             "tooltip": "Returns a picture",
             "helpUrl": "",
@@ -1257,6 +1308,19 @@ sprite.size(scale, scale).move(20, 20);
         this.removeEventListener('keydown', handler);
         console.log('Removed event handler, project stopped/inactive.');
         } else if (event.key === '${key}' || event.key === '${key.toUpperCase()}') {${code}}; 
+        }
+        );`;
+      };
+      
+      javascript.javascriptGenerator.forBlock['onButtonPress'] = function(block) {
+        const key = block.getFieldValue('KEY');
+        const code = javascript.javascriptGenerator.statementToCode(block, 'CODE');
+        return `
+        document.addEventListener('click', function handler(event) {
+        if (document.getElementById('handle').value === 'NO') {
+        this.removeEventListener('click', handler);
+        console.log('Removed event handler, project stopped/inactive.');
+        } else if (event.target.id === '${key}BTN' || event.target.id === '${key.toUpperCase()}BTN') {${code}}; 
         }
         );`;
       };
