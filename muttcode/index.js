@@ -1422,6 +1422,7 @@ sprite.size(scale, scale).move(20, 20);
       }
       // names.forEach((name, index) => rollCall(name, index)); 
       // x and y getters
+      stuff = [];
 
       javascript.javascriptGenerator.forBlock['gx22'] = function(block) {
         const a1 = block.getFieldValue('SPRITE');
