@@ -1270,7 +1270,7 @@ sprite.size(scale, scale).move(20, 20);
             "colour": "#919191"
           },
           {
-            "type": "gx",
+            "type": "gx22",
             "tooltip": "Gets sprite's X co-ordinate",
             "helpUrl": "",
             "message0": "X position of %1 %2",
@@ -1289,7 +1289,7 @@ sprite.size(scale, scale).move(20, 20);
             "colour": 0
           },
           {
-            "type": "gy",
+            "type": "gy22",
             "tooltip": "Gets sprite's Y co-ordinate",
             "helpUrl": "",
             "message0": "Y position of %1 %2",
