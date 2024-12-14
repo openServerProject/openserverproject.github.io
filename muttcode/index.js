@@ -161,6 +161,14 @@ sprite.size(scale, scale).move(20, 20);
                 {
                   "kind": "block",
                   "type": "pic"
+                },
+                {
+                  "kind": "block",
+                  "type": "gx"
+                },
+                {
+                  "kind": "block",
+                  "type": "gy"
                 }
               ]
             }
@@ -1260,7 +1268,45 @@ sprite.size(scale, scale).move(20, 20);
             ],
             "output": null,
             "colour": "#919191"
-          }         
+          },
+          {
+            "type": "gx",
+            "tooltip": "Gets sprite's X co-ordinate",
+            "helpUrl": "",
+            "message0": "X position of %1 %2",
+            "args0": [
+              {
+                "type": "field_input",
+                "name": "SPRITE",
+                "text": "sprite"
+              },
+              {
+                "type": "input_dummy",
+                "name": "NAME"
+              }
+            ],
+            "output": null,
+            "colour": 0
+          },
+          {
+            "type": "gy",
+            "tooltip": "Gets sprite's Y co-ordinate",
+            "helpUrl": "",
+            "message0": "Y position of %1 %2",
+            "args0": [
+              {
+                "type": "field_input",
+                "name": "SPRITE",
+                "text": "sprite"
+              },
+              {
+                "type": "input_dummy",
+                "name": "NAME"
+              }
+            ],
+            "output": null,
+            "colour": 0
+          }                            
         ]
       );
 
@@ -1272,7 +1318,7 @@ sprite.size(scale, scale).move(20, 20);
 
       /*function evalC(code) {
         if (isInsideIframe()) {
-          console.warn("This website is running in an IFrame/embed! Please got to https://muttcode.glitch.me to run 'eval' statements.");
+          console.warn("This website is running in an IFrame/embed! Please got to https://azuretecdevsoffical.github.io or https://muttcode.glitch.me (old) to run 'eval' statements.");
           return eval("");
         } else {
           return eval(code);
@@ -1375,6 +1421,17 @@ sprite.size(scale, scale).move(20, 20);
         return listChar.join(',');
       }
       // names.forEach((name, index) => rollCall(name, index)); 
+
+      javascript.javascriptGenerator.forBlock['gx'] = function(block) {
+        const a1 = block.getFieldValue('SPRITE');
+        return [`${a1}.x`,Order.ATOMIC];
+      };
+
+      javascript.javascriptGenerator.forBlock['gy'] = function(block) {
+        const a1 = block.getFieldValue('SPRITE');
+        return [`${a1}.y`,Order.ATOMIC];
+      };
+
       javascript.javascriptGenerator.forBlock['1010pixelGrid'] = function(block) {
         const a1 = block.getFieldValue('GRIDBLK');
         return [`${a1}`,Order.ATOMIC];
